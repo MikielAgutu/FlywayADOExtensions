@@ -1,35 +1,18 @@
 import tasks = require('azure-pipelines-task-lib/task');
-import trm = require('azure-pipelines-task-lib/toolrunner');
 
-export type FlywayOption = {
+export type FlywayCliArgument = {
     name: string,
     value: string | undefined
 }
 
-export async function runFlywayCli(command: string, options: FlywayOption[], extraArgs: string[]) {
-    let flyway: trm.ToolRunner;
-
+export async function runFlywayCli(command: string, cliArguments: FlywayCliArgument[], extraCliArguments: string[]) {
     if (!command) {
-        return tasks.setResult(tasks.TaskResult.Failed, "Command is required");
+        throw new Error("Command is required");
     }
 
-    console.log("Flyway command: " + command);
-
-    let cmdPath = tasks.which("flyway", true);
-
-    let args: string[] = [];
-    args.push('-n');
-    args.push('-color=always');
-
-    options.filter(option => option.value !== undefined).forEach(option => args.push(`-${option.name}=${option.value}`));
-    extraArgs.forEach(arg => args.push(arg));
-    args.push(command);
-
-    console.log("Executing Flyway CLI");
-    console.log(args.join(" "));
-
-    flyway = tasks.tool(cmdPath).arg(args);
-
+    const flywayPath = tasks.which("flyway", true);
+    const args = cliArguments.filter(option => option.value !== undefined).map(option => `-${option.name}=${option.value}`);
+    const flyway = tasks.tool(flywayPath).arg([ command, '-n', '-color=always', ...args, ...extraCliArguments ]);
     const exitCode = await flyway.execAsync();
 
     if (exitCode !== 0) {
