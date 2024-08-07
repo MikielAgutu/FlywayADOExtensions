@@ -30,6 +30,10 @@ export async function runFlywayCli(command: string, options: FlywayOption[], ext
 
     flyway = tasks.tool(cmdPath).arg(args);
 
-    await flyway.execAsync();
+    const exitCode = await flyway.execAsync();
+
+    if (exitCode !== 0) {
+        throw new Error("Flyway CLI failed with exit code " + exitCode);
+    }
 }
 
