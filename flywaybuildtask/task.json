@@ -13,36 +13,7 @@
         "Patch": 1
     },
     "instanceNameFormat": "Flyway CLI",
-    "groups": [
-        {
-            "name": "variables",
-            "displayName": "Variables",
-            "isExpanded": false,
-            "visibleRule": "command = migrate || command = clean || command = info || command = validate || command = baseline || command = repair  || comamnd = undo || command = check"
-        }
-    ],
     "inputs": [
-        {
-            "name": "command",
-            "type": "pickList",
-            "label": "Command",
-            "defaultValue": "migrate",
-            "required": true,
-            "helpMarkDown": "The flyway command to run.",
-            "options": {
-                "migrate": "migrate",
-                "clean": "clean",
-                "info": "info",
-                "validate": "validate",
-                "baseline": "baseline",
-                "repair": "repair",
-                "undo": "undo",
-                "check": "check"
-            },
-            "properties": {
-                "EditableOptions": "False"
-            }
-        },
         {
             "name": "workingDirectory",
             "type": "filePath",
