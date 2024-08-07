@@ -1,6 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
-    "id": "33f33135-80d0-422f-90ac-7faddeed30d2",
+    "id": "f03340ca-a24a-4c73-a4fd-9f58d113c27a",
     "name": "FlywayCherryPickMigrate",
     "friendlyName": "Flyway Cherry Pick Migrate",
     "description": "Runs Flyway migrate command with cherry pick versions",

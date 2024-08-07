@@ -1,6 +1,6 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
-    "id": "33f33135-80d0-422f-90ac-7faddeed30d2",
+    "id": "7850a81d-9ba6-4835-b331-37bb68deaecc",
     "name": "FlywayInstall",
     "friendlyName": "Flyway Install",
     "description": "Installs the Flyway command line",
