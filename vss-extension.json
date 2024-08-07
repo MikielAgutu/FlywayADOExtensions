@@ -2,37 +2,34 @@
     "manifestVersion": 1,
     "id": "flyway-task",
     "name": "Flyway CLI",
-    "version": "0.0.1",
+    "version": "0.0.5",
     "publisher": "MikielAgutu",
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
         }
-    ],    
+    ],
     "description": "Run Flyway CLI",
     "categories": [
         "Azure Pipelines"
     ],
     "icons": {
-        "default": "images/flyway.png"        
+        "default": "images/flyway.png"
     },
     "files": [
         {
-            "path": "flywayinstalltask"
-        },
-        {
-            "path": "flywayclitask"
+            "path": "flywaybuildtask"
         }
     ],
     "contributions": [
         {
-            "id": "flyway-task",
+            "id": "flyway-build-task",
             "type": "ms.vss-distributed-task.task",
             "targets": [
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "flywaytask"
+                "name": "flywaybuildtask"
             }
         }
     ]
