@@ -5,9 +5,9 @@ import { runFlywayCli } from '../lib/runFlywayCli';
 async function run() {
   try {
     const workingDirectory = tasks.getPathInput('workingDirectory', true);
-    const dbUrl = tasks.getInput('url', true);
-    const dbUser = tasks.getInput('user', true);
-    const dbPassword = tasks.getInput('password', true);
+    const url = tasks.getInput('url', true);
+    const user = tasks.getInput('user', true);
+    const password = tasks.getInput('password', true);
     const commandOptions = tasks.getInput('commandOptions', false);
     const extraArgs = commandOptions ? commandOptions.split(' ') : [];
 
@@ -18,15 +18,15 @@ async function run() {
       },
       {
         name: 'url',
-        value: dbUrl
+        value: url
       },
       {
         name: 'user',
-        value: dbUser
+        value: user
       },
       {
         name: 'password',
-        value: dbPassword
+        value: password
       }
     ];
 
