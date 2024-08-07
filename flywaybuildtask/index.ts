@@ -14,7 +14,10 @@ async function run() {
     const checkRulesLocation = tasks.getInput('checkRulesLocation', false);
     const checkMajorRules = tasks.getInput('checkMajorRules', false);
     const checkMajorTolerance = tasks.getInput('checkMajorTolerance', false);
-    const checkReportPublishLocation = `${tasks.getVariable('System.ArtifactsDirectory')}\\${tasks.getVariable('Build.BuildId')}-Code-Analysis.html'`;
+    const checkReportName = `${tasks.getVariable(
+      "Build.BuildId"
+    )}-Code-Analysis.html'`;
+    const checkReportPath = `${workingDirectory}\\reports\\${checkReportName}`;
     
     const commandOptions = tasks.getInput('commandOptions', false);
     const extraArgs = commandOptions ? commandOptions.split(' ') : [];
@@ -66,7 +69,7 @@ async function run() {
       },
       {
         name: 'reportFilename',
-        value: checkReportPublishLocation
+        value: checkReportPath
       },
       {
         name: 'errorOverrides',
@@ -82,12 +85,11 @@ async function run() {
 
     if (licenseKey) {
       await runFlywayCli('check', flywayOptions, [ '-code', ...extraArgs]);
+      tasks.uploadArtifact("flyway", checkReportPath, checkReportName);
     } else {
       console.log("Check is not available in Flyway Community Edition. Supply a license key to enable this feature.");
     }
 
-    // Upload check report somehow
-    
     await runFlywayCli('migrate', flywayOptions, extraArgs);
 
     if (licenseKey) {
