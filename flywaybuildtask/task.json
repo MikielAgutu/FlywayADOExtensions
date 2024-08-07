@@ -13,6 +13,14 @@
         "Patch": 1
     },
     "instanceNameFormat": "Flyway CLI",
+    "groups": [
+        {
+            "name": "CheckParameters",
+            "displayName": "Check Parameters",
+            "isExpanded": true,
+            "visibleRule": "shouldRunCheck==true"
+        }
+    ],
     "inputs": [
         {
             "name": "workingDirectory",
@@ -34,14 +42,49 @@
             "type": "string",
             "label": "Database user",
             "helpMarkDown": "The user to use to connect to the database",
-            "required": true
+            "required": false
         },
         {
             "name": "password",
             "type": "string",
             "label": "Database password",
             "helpMarkDown": "The password to use to connect to the database",
+            "required": false
+        },
+        {
+            "name": "shouldRunCheck",
+            "type": "boolean",
+            "defaultValue": "false",
+            "label": "Run Check",
+            "helpMarkDown": "Whether to run the check command as part of the build",
             "required": true
+        },
+        {
+            "name": "checkRulesLocation",
+            "type": "string",
+            "label": "Check Rules Location",
+            "defaultValue": "$(Build.SourcesDirectory)\\templates\\rules",
+            "helpMarkDown": "The location of the rules folder",
+            "required": true,
+            "groupName": "CheckParameters"
+        },
+        {
+            "name": "checkMajorRules",
+            "type": "string",
+            "label": "Check Major Rules",
+            "defaultValue": "RX100,RX101",
+            "helpMarkDown": "The rules to use for Check command",
+            "required": true,
+            "groupName": "CheckParameters"
+        },
+        {
+            "name": "checkMajorTolerance",
+            "type": "string",
+            "defaultValue": "0",
+            "label": "Check Major Tolerance",
+            "helpMarkDown": "The major tolerance for the check command",
+            "required": true,
+            "groupName": "CheckParameters"
         },
         {
             "name": "commandOptions",

@@ -6,10 +6,17 @@ async function run() {
   try {
     const workingDirectory = tasks.getPathInput('workingDirectory', true);
     const url = tasks.getInput('url', true);
-    const user = tasks.getInput('user', true);
-    const password = tasks.getInput('password', true);
-    const commandOptions = tasks.getInput('commandOptions', false);
+
+    const user = tasks.getInput('user', false);
+    const password = tasks.getInput('password', false);
     const licenseKey = tasks.getInput('licenseKey', false);
+
+    const checkRulesLocation = tasks.getInput('checkRulesLocation', false);
+    const checkMajorRules = tasks.getInput('checkMajorRules', false);
+    const checkMajorTolerance = tasks.getInput('checkMajorTolerance', false);
+    const checkReportPublishLocation = `${tasks.getVariable('System.ArtifactsDirectory')}\\${tasks.getVariable('Build.BuildId')}-Code-Analysis.html'`;
+    
+    const commandOptions = tasks.getInput('commandOptions', false);
     const extraArgs = commandOptions ? commandOptions.split(' ') : [];
 
     const flywayOptions = [
@@ -18,7 +25,11 @@ async function run() {
         value: 'filesystem:' + (workingDirectory ? workingDirectory : '')
       },
       {
-        name: 'url',
+        name: 'environment',
+        value: 'target'
+      },
+      {
+        name: 'environments.target.url',
         value: url
       },
       {
@@ -36,11 +47,47 @@ async function run() {
       {
         name: 'cleanDisabled',
         value: 'false'
-      }
+      },
+      {
+        name: 'check.majorRules',
+        value: checkMajorRules
+      },
+      {
+        name: 'check.majorTolerance',
+        value: checkMajorTolerance
+      },
+      {
+        name: 'check.rulesLocation',
+        value: checkRulesLocation
+      },
+      {
+        name: 'reportEnabled',
+        value: 'true'
+      },
+      {
+        name: 'reportFilename',
+        value: checkReportPublishLocation
+      },
+      {
+        name: 'errorOverrides',
+        value: 'S0001:0:I'
+      },
+      {
+        name: 'baselineOnMigrate',
+        value: 'true'
+      },
     ];
 
-    await runFlywayCli('info', flywayOptions, extraArgs);
     await runFlywayCli('clean', flywayOptions, extraArgs);
+
+    if (licenseKey) {
+      await runFlywayCli('check', flywayOptions, [ '-code', ...extraArgs]);
+    } else {
+      console.log("Check is not available in Flyway Community Edition. Supply a license key to enable this feature.");
+    }
+
+    // Upload check report somehow
+    
     await runFlywayCli('migrate', flywayOptions, extraArgs);
 
     if (licenseKey) {
