@@ -18,7 +18,7 @@ async function run() {
       "Build.BuildId"
     )}-Code-Analysis.html'`;
     const checkReportPath = `${workingDirectory}\\reports\\${checkReportName}`;
-    
+
     const commandOptions = tasks.getInput('commandOptions', false);
     const extraArgs = commandOptions ? commandOptions.split(' ') : [];
 
@@ -84,7 +84,7 @@ async function run() {
     await runFlywayCli('clean', flywayOptions, extraArgs);
 
     if (licenseKey) {
-      await runFlywayCli('check', flywayOptions, [ '-code', ...extraArgs]);
+      await runFlywayCli('check', flywayOptions, ['-code', ...extraArgs]);
       tasks.uploadArtifact("flyway", checkReportPath, checkReportName);
     } else {
       console.log("Check is not available in Flyway Community Edition. Supply a license key to enable this feature.");
