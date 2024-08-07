@@ -1,0 +1,31 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "33f33135-80d0-422f-90ac-7faddeed30d2",
+    "name": "FlywayInstall",
+    "friendlyName": "Flyway Install",
+    "description": "Installs the Flyway command line",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "MikielAgutu",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 1
+    },
+    "instanceNameFormat": "Flyway Install",
+    "inputs": [
+        {
+            "name": "flywayVersion",
+            "type": "string",
+            "label": "Flyway Version",
+            "defaultValue": "10.17.0",
+            "required": true,
+            "helpMarkDown": "The version of Flyway to install"
+        }
+    ],
+    "execution": {
+        "Node20_1": {
+            "target": "index.js"
+        }
+    }
+    }

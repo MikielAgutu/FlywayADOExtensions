@@ -1,0 +1,88 @@
+{
+    "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
+    "id": "33f33135-80d0-422f-90ac-7faddeed30d2",
+    "name": "FlywayCLI",
+    "friendlyName": "Flyway CLI",
+    "description": "Runs the Flyway Command Line",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "MikielAgutu",
+    "version": {
+        "Major": 0,
+        "Minor": 0,
+        "Patch": 1
+    },
+    "instanceNameFormat": "Flyway CLI",
+    "groups": [
+        {
+            "name": "variables",
+            "displayName": "Variables",
+            "isExpanded": false,
+            "visibleRule": "command = migrate || command = clean || command = info || command = validate || command = baseline || command = repair  || comamnd = undo || command = check"
+        }
+    ],
+    "inputs": [
+        {
+            "name": "command",
+            "type": "pickList",
+            "label": "Command",
+            "defaultValue": "migrate",
+            "required": true,
+            "helpMarkDown": "The flyway command to run.",
+            "options": {
+                "migrate": "migrate",
+                "clean": "clean",
+                "info": "info",
+                "validate": "validate",
+                "baseline": "baseline",
+                "repair": "repair",
+                "undo": "undo",
+                "check": "check"
+            },
+            "properties": {
+                "EditableOptions": "False"
+            }
+        },
+        {
+            "name": "workingDirectory",
+            "type": "filePath",
+            "label": "SQL scripts directory",
+            "defaultValue": "$(System.DefaultWorkingDirectory)",
+            "helpMarkDown": "Flyway SQL scripts directory. If empty, the root of the repository (build) or artifacts (release) is used, which is $(System.DefaultWorkingDirectory)",
+            "required": "false"
+        },
+        {
+            "name": "url",
+            "type": "string",
+            "label": "JDBC url",
+            "helpMarkDown": "The jdbc url must follow standard format. These formats can be found on Flyway documentation. [Ex for SQL Server](https://flywaydb.org/documentation/database/sqlserver). But first be sure [your database is supported](https://flywaydb.org/documentation/commandline/#jdbc-drivers)",
+            "required": true
+        },
+        {
+            "name": "user",
+            "type": "string",
+            "label": "Database user",
+            "helpMarkDown": "The user to use to connect to the database",
+            "required": false
+        },
+        {
+            "name": "password",
+            "type": "string",
+            "label": "Database password",
+            "helpMarkDown": "The password to use to connect to the database",
+            "required": false
+        },
+        {
+            "name": "commandOptions",
+            "type": "string",
+            "label": "Command Options",
+            "required": "false",
+            "helpMarkDown": "Any additional options for the selected command such as `-input=true`. Multiple options can be provided delimited by spaces as `-option1=value -option2=value -option3=value`"
+        }
+    ],
+    "execution": {
+        "Node20_1": {
+            "target": "index.js"
+        }
+    }
+}
