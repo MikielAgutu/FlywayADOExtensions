@@ -51,7 +51,7 @@ async function downloadFlyway(version: string): Promise<string>{
 }
 
 function getDownloadUrl(version: string): string {
-    var url = format("https://repo1.maven.org/maven2/org/flywaydb/flyway-commandline/%s/flyway-commandline-%s-%s", version, version);
+    const url = format("https://download.red-gate.com/maven/release/com/redgate/flyway/flyway-commandline/%s/flyway-commandline-%s-%s", version, version);
     switch(os.type()){
         case 'Linux':
             return format(url, "linux-x64.tar.gz");
