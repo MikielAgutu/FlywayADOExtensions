@@ -9,6 +9,7 @@ async function run() {
     const user = tasks.getInput('user', true);
     const password = tasks.getInput('password', true);
     const commandOptions = tasks.getInput('commandOptions', false);
+    const licenseKey = tasks.getInput('licenseKey', false);
     const extraArgs = commandOptions ? commandOptions.split(' ') : [];
 
     const flywayOptions = [
@@ -27,13 +28,26 @@ async function run() {
       {
         name: 'password',
         value: password
+      },
+      {
+        name: 'licenseKey',
+        value: licenseKey
+      },
+      {
+        name: 'cleanDisabled',
+        value: 'false'
       }
     ];
 
     await runFlywayCli('info', flywayOptions, extraArgs);
     await runFlywayCli('clean', flywayOptions, extraArgs);
     await runFlywayCli('migrate', flywayOptions, extraArgs);
-    await runFlywayCli('undo', flywayOptions, extraArgs);
+
+    if (licenseKey) {
+      await runFlywayCli('undo', flywayOptions, extraArgs);
+    } else {
+      console.log("Undo is not available in Flyway Community Edition. Supply a license key to enable this feature.");
+    }
 
     tasks.setResult(tasks.TaskResult.Succeeded, "");
   }

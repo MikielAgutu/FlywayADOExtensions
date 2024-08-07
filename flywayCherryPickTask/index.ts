@@ -4,24 +4,22 @@ import { runFlywayCli } from '../lib/runFlywayCli';
 
 async function run() {
   try {
-    const command = tasks.getInput('command', true);
-
-    if (!command) {
-      return tasks.setResult(tasks.TaskResult.Failed, "Command is required");
-    }
-
+    const cherryPickVersions = tasks.getPathInput('cherryPickVersions', true);
     const workingDirectory = tasks.getPathInput('workingDirectory', true);
     const url = tasks.getInput('url', true);
     const user = tasks.getInput('user', true);
     const password = tasks.getInput('password', true);
     const commandOptions = tasks.getInput('commandOptions', false);
-    const licenseKey = tasks.getInput('licenseKey', false);
     const extraArgs = commandOptions ? commandOptions.split(' ') : [];
 
-    await runFlywayCli(command, [
+    const flywayOptions = [
       {
         name: 'locations',
         value: 'filesystem:' + (workingDirectory ? workingDirectory : '')
+      },
+      {
+        name: 'cherryPick',
+        value: cherryPickVersions
       },
       {
         name: 'url',
@@ -34,13 +32,10 @@ async function run() {
       {
         name: 'password',
         value: password
-      },
-      {
-        name: 'licenseKey',
-        value: licenseKey
-      },
-    ],
-      extraArgs);
+      }
+    ];
+
+    await runFlywayCli('migrate', flywayOptions, extraArgs);
 
     tasks.setResult(tasks.TaskResult.Succeeded, "");
   }

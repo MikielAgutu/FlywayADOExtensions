@@ -1,0 +1,11 @@
+[environments.sample]
+url = "jdbc:h2:mem:db"
+user = "sample user"
+password = "sample password"
+
+[flyway]
+environment = "sample"
+locations = ["filesystem:./sql"]
+cleanDisabled = false
+loggers = ["console"]
+jarDirs = ["jars"]

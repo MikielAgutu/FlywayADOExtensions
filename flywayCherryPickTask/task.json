@@ -1,9 +1,9 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
     "id": "33f33135-80d0-422f-90ac-7faddeed30d2",
-    "name": "FLywayBuildTask",
-    "friendlyName": "Flyway Build",
-    "description": "Runs a Flyway Build: cleans",
+    "name": "FlywayCherryPickMigrate",
+    "friendlyName": "Flyway Cherry Pick Migrate",
+    "description": "Runs Flyway migrate command with cherry pick versions",
     "helpMarkDown": "",
     "category": "Utility",
     "author": "MikielAgutu",
@@ -14,6 +14,13 @@
     },
     "instanceNameFormat": "Flyway CLI",
     "inputs": [
+        {
+            "name": "cherryPickVersions",
+            "type": "string",
+            "label": "Comma separated list of versions to cherry pick",
+            "helpMarkDown": "Comma separated list of versions to cherry pick. The versions must be in a semver format e.g. `1.0` or `1.0.1`",
+            "required": "true"
+        },
         {
             "name": "workingDirectory",
             "type": "filePath",
