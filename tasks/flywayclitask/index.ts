@@ -1,5 +1,4 @@
 import tasks = require('azure-pipelines-task-lib/task');
-import trm = require('azure-pipelines-task-lib/toolrunner');
 import { run as runFlywayCli } from '../lib/flywayCli';
 
 async function run() {
@@ -12,8 +11,8 @@ async function run() {
 
     const workingDirectory = tasks.getPathInput('workingDirectory', true);
     const url = tasks.getInput('url', true);
-    const user = tasks.getInput('user', true);
-    const password = tasks.getInput('password', true);
+    const user = tasks.getInput('user', false);
+    const password = tasks.getInput('password', false);
     const commandOptions = tasks.getInput('commandOptions', false);
     const licenseKey = tasks.getInput('licenseKey', false);
     const extraArgs = commandOptions ? commandOptions.split(' ') : [];
