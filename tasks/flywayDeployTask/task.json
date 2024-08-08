@@ -10,7 +10,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 19
+        "Patch": 22
     },
     "demands": [
         "npm"
@@ -91,6 +91,25 @@
             "helpMarkDown": "Whether to check drift as part of the check command",
             "required": true,
             "groupName": "CheckParameters"
+        },
+        {
+            "name": "checkUrl",
+            "type": "string",
+            "label": "Check Database Url",
+            "helpMarkDown": "URL for the database to perform check command against",
+            "required": true,
+            "groupName": "CheckParameters",
+            "visibleRule": "checkDrift==true"
+        },
+        {
+            "name": "failOnDrift",
+            "type": "boolean",
+            "label": "Fail build on drift",
+            "helpMarkDown": "Whether to fail the build if drift is detected",
+            "required": true,
+            "groupName": "CheckParameters",
+            "visibleRule": "checkDrift==true",
+            "defaultValue": "true"
         },
         {
             "name": "checkDryRun",

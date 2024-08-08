@@ -19,7 +19,11 @@ async function run() {
     const checkReportPath = `${workingDirectory}/reports/${checkReportName}`;
 
     const checkChanges = tasks.getBoolInput('checkChanges', false);
+
     const checkDrift = tasks.getBoolInput('checkDrift', false);
+    const checkUrl = tasks.getInput('checkUrl', false);
+    const checkFailOnDrift = tasks.getBoolInput('checkFailOnDrift', false);
+
     const checkDryRun = tasks.getBoolInput('checkDryRun', false);
     const checkCode = tasks.getBoolInput('checkCode', false);
 
@@ -98,10 +102,13 @@ async function run() {
 
       if (checkDrift) {
         checkArgs.push('-drift');
+        checkArgs.push('-environments.check.url=' + checkUrl);
+        checkArgs.push('-check.buildEnvironment=check');
+        checkArgs.push('-check.failOnDrift=' + checkFailOnDrift);
       }
 
       if (checkDryRun) {
-        checkArgs.push('-dryRun');
+        checkArgs.push('-dryrun');
       }
 
       await flywayCli.run('check', flywayOptions, [...extraArgs, ...checkArgs]);
