@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "flyway-task",
     "name": "Flyway CLI",
-    "version": "0.0.9",
+    "version": "0.0.11",
     "publisher": "MikielAgutu",
     "targets": [
         {
@@ -18,7 +18,10 @@
     },
     "files": [
         {
-            "path": "tasks/flywaybuildtask"
+            "path": "tasks/flywayBuildTask"
+        },
+        {
+            "path": "tasks/flywayCliInstallTask"
         }
     ],
     "contributions": [
@@ -29,7 +32,17 @@
                 "ms.vss-distributed-task.tasks"
             ],
             "properties": {
-                "name": "flywaybuildtask"
+                "name": "tasks/flywayBuildTask"
+            }
+        },
+        {
+            "id": "flyway-cli-install-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "tasks/flywayCliInstallTask"
             }
         }
     ]

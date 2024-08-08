@@ -1,8 +1,8 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
     "id": "7850a81d-9ba6-4835-b331-37bb68deaecc",
-    "name": "FlywayInstall",
-    "friendlyName": "Flyway Install",
+    "name": "flywayCliInstall",
+    "friendlyName": "Flyway CLI Install",
     "description": "Installs the Flyway command line",
     "helpMarkDown": "",
     "category": "Utility",
@@ -10,9 +10,9 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 1
+        "Patch": 11
     },
-    "instanceNameFormat": "Flyway Install",
+    "instanceNameFormat": "Flyway CLI Install",
     "inputs": [
         {
             "name": "flywayVersion",
