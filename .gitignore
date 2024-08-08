@@ -3,3 +3,4 @@
 .taskkey
 *.js
 **/node_modules/**
+*.vsix
