@@ -102,6 +102,24 @@
             "visibleRule": "checkDrift==true"
         },
         {
+            "name": "checkUser",
+            "type": "string",
+            "label": "Check database user",
+            "helpMarkDown": "The user to use to connect to the database",
+            "required": false,
+            "groupName": "CheckParameters",
+            "visibleRule": "checkDrift==true"
+        },
+        {
+            "name": "checkPassword",
+            "type": "string",
+            "label": "Check database password",
+            "helpMarkDown": "The password to use to connect to the database",
+            "required": false,
+            "groupName": "CheckParameters",
+            "visibleRule": "checkDrift==true"
+        },
+        {
             "name": "failOnDrift",
             "type": "boolean",
             "label": "Fail build on drift",

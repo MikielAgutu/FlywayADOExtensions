@@ -23,6 +23,8 @@ async function run() {
     const checkDrift = tasks.getBoolInput('checkDrift', false);
     const checkUrl = tasks.getInput('checkUrl', false);
     const checkFailOnDrift = tasks.getBoolInput('checkFailOnDrift', false);
+    const checkUser = tasks.getInput('checkUser', false);
+    const checkPassword = tasks.getInput('checkPassword', false);
 
     const checkDryRun = tasks.getBoolInput('checkDryRun', false);
     const checkCode = tasks.getBoolInput('checkCode', false);
@@ -105,6 +107,8 @@ async function run() {
         checkArgs.push('-environments.check.url=' + checkUrl);
         checkArgs.push('-check.buildEnvironment=check');
         checkArgs.push('-check.failOnDrift=' + checkFailOnDrift);
+        checkArgs.push('-environments.check.user=' + checkUser);
+        checkArgs.push('-environments.check.password=' + checkPassword);
       }
 
       if (checkDryRun) {
