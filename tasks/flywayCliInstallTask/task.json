@@ -10,7 +10,7 @@
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 23
+        "Patch": 25
     },
     "instanceNameFormat": "Flyway CLI Install",
     "inputs": [
@@ -28,4 +28,4 @@
             "target": "index.js"
         }
     }
-    }
+}
