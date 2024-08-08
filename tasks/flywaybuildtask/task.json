@@ -21,7 +21,12 @@
             "name": "CheckParameters",
             "displayName": "Check Parameters",
             "isExpanded": true,
-            "visibleRule": "shouldRunCheck==true"
+            "visibleRule": "licenseKey != \"\" && shouldRunCheck==true"
+        },
+        {
+            "name": "Advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
         }
     ],
     "inputs": [
@@ -52,6 +57,13 @@
             "type": "string",
             "label": "Database password",
             "helpMarkDown": "The password to use to connect to the database",
+            "required": false
+        },
+        {
+            "name": "licenseKey",
+            "type": "string",
+            "label": "License Key",
+            "helpMarkDown": "The license key to enable Flyway Teams or Enterprise Edition features",
             "required": false
         },
         {
@@ -94,14 +106,8 @@
             "type": "string",
             "label": "Command Options",
             "required": false,
-            "helpMarkDown": "Any additional options for the selected command such as `-input=true`. Multiple options can be provided delimited by spaces as `-option1=value -option2=value -option3=value`"
-        },
-        {
-            "name": "licenseKey",
-            "type": "string",
-            "label": "License Key",
-            "helpMarkDown": "The license key to enable Flyway Teams or Enterprise Edition features",
-            "required": false
+            "helpMarkDown": "Any additional options for the selected command such as `-input=true`. Multiple options can be provided delimited by spaces as `-option1=value -option2=value -option3=value`",
+            "groupName": "Advanced"
         }
     ],
     "execution": {
