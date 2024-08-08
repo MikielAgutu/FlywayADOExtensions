@@ -5,7 +5,7 @@ export type FlywayCliArgument = {
     value: string | undefined
 }
 
-export async function runFlywayCli(command: string, cliArguments: FlywayCliArgument[], extraCliArguments: string[]) {
+export async function run(command: string, cliArguments: FlywayCliArgument[], extraCliArguments: string[]) {
     if (!command) {
         throw new Error("Command is required");
     }

@@ -2,6 +2,7 @@
     "name": "flywaytasks",
     "version": "1.0.0",
     "scripts": {
+        "install:tasks": "glob-exec --parallel --foreach \"tasks/*/tsconfig.json\" -- \"cd {{file.dir}} && npm install --no-update-notifier --no-progress --legacy-peer-deps --no-fund\"",
         "compile:tasks": "glob-exec \"tasks/*/tsconfig.json\" -- \"tsc -b {{files.join(' ')}}\"",
         "package:tasks": "tfx extension create --manifest-globs vss-extension.json",
         "package": "glob-exec --parallel --foreach \"tasks/*/tsconfig.json\" -- \"cd {{file.dir}} && npm dedupe && npm prune --omit=dev\""

@@ -1,5 +1,5 @@
 import tasks = require('azure-pipelines-task-lib/task');
-import { runFlywayCli } from '../lib/runFlywayCli.js';
+import * as flywayCli from '../lib/flywayCli.js';
 
 async function run() {
   try {
@@ -80,19 +80,19 @@ async function run() {
       },
     ];
 
-    await runFlywayCli('clean', flywayOptions, extraArgs);
+    await flywayCli.run('clean', flywayOptions, extraArgs);
 
     if (licenseKey) {
-      await runFlywayCli('check', flywayOptions, ['-code', ...extraArgs]);
+      await flywayCli.run('check', flywayOptions, ['-code', ...extraArgs]);
       tasks.uploadArtifact("flyway", checkReportPath, checkReportName);
     } else {
       console.log("Check is not available in Flyway Community Edition. Supply a license key to enable this feature.");
     }
 
-    await runFlywayCli('migrate', flywayOptions, extraArgs);
+    await flywayCli.run('migrate', flywayOptions, extraArgs);
 
     if (licenseKey) {
-      await runFlywayCli('undo', flywayOptions, extraArgs);
+      await flywayCli.run('undo', flywayOptions, extraArgs);
     } else {
       console.log("Undo is not available in Flyway Community Edition. Supply a license key to enable this feature.");
     }
