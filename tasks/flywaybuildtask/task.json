@@ -3,15 +3,18 @@
     "id": "33f33135-80d0-422f-90ac-7faddeed30d2",
     "name": "FLywayBuildTask",
     "friendlyName": "Flyway Build",
-    "description": "Runs a Flyway Build: cleans",
+    "description": "Runs a Flyway Build",
     "helpMarkDown": "",
     "category": "Utility",
     "author": "MikielAgutu",
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 1
+        "Patch": 9
     },
+    "demands": [
+        "npm"
+    ],
     "instanceNameFormat": "Flyway CLI",
     "groups": [
         {

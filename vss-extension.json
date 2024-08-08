@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "flyway-task",
     "name": "Flyway CLI",
-    "version": "0.0.5",
+    "version": "0.0.9",
     "publisher": "MikielAgutu",
     "targets": [
         {
@@ -18,7 +18,7 @@
     },
     "files": [
         {
-            "path": "flywaybuildtask"
+            "path": "tasks/flywaybuildtask"
         }
     ],
     "contributions": [
