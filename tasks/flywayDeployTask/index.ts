@@ -18,6 +18,11 @@ async function run() {
     )}-Code-Analysis`;
     const checkReportPath = `${workingDirectory}/reports/${checkReportName}`;
 
+    const checkChanges = tasks.getBoolInput('checkChanges', false);
+    const checkDrift = tasks.getBoolInput('checkDrift', false);
+    const checkDryRun = tasks.getBoolInput('checkDryRun', false);
+    const checkCode = tasks.getBoolInput('checkCode', false);
+
     const commandOptions = tasks.getInput('commandOptions', false);
     const extraArgs = commandOptions ? commandOptions.split(' ') : [];
 
@@ -80,22 +85,33 @@ async function run() {
       },
     ];
 
-    await flywayCli.run('clean', flywayOptions, extraArgs);
-
     if (licenseKey) {
-      await flywayCli.run('check', flywayOptions, ['-code', ...extraArgs]);
+      const checkArgs = [];
+
+      if (checkChanges) {
+        checkArgs.push('-changes');
+      }
+
+      if (checkCode) {
+        checkArgs.push('-code');
+      }
+
+      if (checkDrift) {
+        checkArgs.push('-drift');
+      }
+
+      if (checkDryRun) {
+        checkArgs.push('-dryRun');
+      }
+
+      await flywayCli.run('check', flywayOptions, [...extraArgs, ...checkArgs]);
       tasks.uploadArtifact("flyway", `${checkReportPath}.html`, checkReportName);
     } else {
       console.log("Check is not available in Flyway Community Edition. Supply a license key to enable this feature.");
     }
 
-    await flywayCli.run('migrate', flywayOptions, extraArgs);
-
-    if (licenseKey) {
-      await flywayCli.run('undo', flywayOptions, extraArgs);
-    } else {
-      console.log("Undo is not available in Flyway Community Edition. Supply a license key to enable this feature.");
-    }
+    await flywayCli.run('repair', flywayOptions, ['-outOfOrder=true', ...extraArgs]);
+    await flywayCli.run('migrate', flywayOptions, ['-outOfOrder=true', ...extraArgs]);
 
     tasks.setResult(tasks.TaskResult.Succeeded, "");
   }

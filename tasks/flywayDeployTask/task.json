@@ -1,9 +1,9 @@
 {
     "$schema": "https://raw.githubusercontent.com/Microsoft/azure-pipelines-task-lib/master/tasks.schema.json",
-    "id": "33f33135-80d0-422f-90ac-7faddeed30d2",
-    "name": "flywayBuildTask",
-    "friendlyName": "Flyway Build",
-    "description": "Runs a Flyway Build",
+    "id": "ab9001ac-5d8a-49fd-ab94-f32eb5c75be5",
+    "name": "flywayDeployTask",
+    "friendlyName": "Flyway Deploy",
+    "description": "Deploy to a database with Flyway",
     "helpMarkDown": "",
     "category": "Utility",
     "author": "MikielAgutu",
@@ -15,7 +15,7 @@
     "demands": [
         "npm"
     ],
-    "instanceNameFormat": "Flyway Build",
+    "instanceNameFormat": "Flyway Deploy",
     "groups": [
         {
             "name": "CheckParameters",
@@ -73,6 +73,42 @@
             "label": "Run Check",
             "helpMarkDown": "Whether to run the check command as part of the build. This is a paid feature, make sure to set a licence key!",
             "required": true
+        },
+        {
+            "name": "checkChanges",
+            "type": "boolean",
+            "label": "Check Changes",
+            "defaultValue": "true",
+            "helpMarkDown": "Whether to check changes as part of the check command",
+            "required": true,
+            "groupName": "CheckParameters"
+        },
+        {
+            "name": "checkDrift",
+            "type": "boolean",
+            "label": "Check Drift",
+            "defaultValue": "true",
+            "helpMarkDown": "Whether to check drift as part of the check command",
+            "required": true,
+            "groupName": "CheckParameters"
+        },
+        {
+            "name": "checkDryRun",
+            "type": "boolean",
+            "label": "Check Dry Run",
+            "defaultValue": "true",
+            "helpMarkDown": "Whether to check dry run as part of the check command",
+            "required": true,
+            "groupName": "CheckParameters"
+        },
+        {
+            "name": "checkCode",
+            "type": "boolean",
+            "label": "Check Code",
+            "defaultValue": "true",
+            "helpMarkDown": "Whether to check code as part of the check command",
+            "required": true,
+            "groupName": "CheckParameters"
         },
         {
             "name": "checkRulesLocation",
