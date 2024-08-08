@@ -1,5 +1,5 @@
 import tasks = require('azure-pipelines-task-lib/task');
-import { run as runFlywayCli } from '../lib/flywayCli';
+import { run as runFlywayCli } from './flywayCli.js';
 
 async function run() {
   try {

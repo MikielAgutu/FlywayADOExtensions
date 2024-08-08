@@ -4,13 +4,13 @@
     "name": "FlywayCLI",
     "friendlyName": "Flyway CLI",
     "description": "Runs the Flyway Command Line",
-    "helpMarkDown": "",
+    "helpMarkDown": "Runs the Flyway Command Line",
     "category": "Utility",
     "author": "MikielAgutu",
     "version": {
         "Major": 0,
         "Minor": 0,
-        "Patch": 23
+        "Patch": 24
     },
     "instanceNameFormat": "Flyway CLI",
     "groups": [
@@ -18,7 +18,7 @@
             "name": "variables",
             "displayName": "Variables",
             "isExpanded": false,
-            "visibleRule": "command = migrate || command = clean || command = info || command = validate || command = baseline || command = repair  || comamnd = undo || command = check"
+            "visibleRule": "command = migrate || command = clean || command = info || command = validate || command = baseline || command = repair  || command = undo || command = check"
         }
     ],
     "inputs": [
