@@ -71,7 +71,7 @@
             "type": "boolean",
             "defaultValue": "false",
             "label": "Run Check",
-            "helpMarkDown": "Whether to run the check command as part of the build",
+            "helpMarkDown": "Whether to run the check command as part of the build. This is a paid feature, make sure to set a licence key!",
             "required": true
         },
         {
